@@ -18,6 +18,7 @@ module.exports =
     app.post('/user_create', userController.create);
 
     app.post('/user/:id/group_create', groupOfBookmarkController.create);
+    app.get('/user/:id/group_list', groupOfBookmarkController.list);
 
     app.post('/user/:id/group/:group/subGroup_create', subGroupOfBookmarkController.create);
 

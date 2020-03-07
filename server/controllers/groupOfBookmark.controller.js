@@ -6,5 +6,12 @@ module.exports = {
         GroupOfBookmarks.create(dataCreate)
             .then(groupOfBookmarks => res.status(200).json({message: 'groupOfBookmarks was created!'}))
             .catch(error => res.status(404).send(error));
+    },
+    list(req, res) {
+        GroupOfBookmarks.findAll({
+            where: {UserId: req.params.id}
+        })
+            .then(groups => res.status(200).send(groups))
+            .catch(error => res.status(404).send(error));
     }
 };
