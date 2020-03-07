@@ -8,19 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      link: {
-        type: Sequelize.STRING
-      },
       title: {
         type: Sequelize.STRING
       },
-      search_words: {
+      searchWords: {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
-      UserId: {
+      SubGroupOfBookmarksId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'SubGroupOfBookmarks',
           key: 'id'
         }
       },
