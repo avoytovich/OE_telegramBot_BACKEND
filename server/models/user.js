@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate(models) {
-        User.hasMany(models.Bookmark, {
+        User.hasMany(models.GroupOfBookmarks, {
           foreignKey: 'UserId'
         });
       }

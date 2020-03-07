@@ -1,4 +1,10 @@
-const { userController, loginController, bookmarkController } = require('./../controllers');
+const { 
+  userController,
+  loginController,
+  groupOfBookmarkController,
+  subGroupOfBookmarkController,
+  bookmarkController
+} = require('./../controllers');
 
 module.exports =
   (app) => {
@@ -9,7 +15,11 @@ module.exports =
     app.post('/login', loginController.login);
     app.get('/activation/:token', loginController.activation);
 
-    app.post('/user', userController.create);
+    app.post('/user_create', userController.create);
 
-    app.post('/bookmark', bookmarkController.create);
+    app.post('/user/:id/group_create', groupOfBookmarkController.create);
+
+    app.post('/user/:id/group/:group/subGroup_create', subGroupOfBookmarkController.create);
+
+    app.post('/user/:id/group/:group/subGroup/:subGroup/bookmark_create', bookmarkController.create);
   };
