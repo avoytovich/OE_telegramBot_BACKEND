@@ -11,7 +11,7 @@ module.exports = {
         GroupOfBookmarks.findAll({
             where: {UserId: req.params.id}
         })
-            .then(groups => res.status(200).send(groups))
+            .then(groups => res.status(200).json({groups}))
             .catch(error => res.status(404).send(error));
     }
 };

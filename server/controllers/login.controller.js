@@ -14,7 +14,8 @@ module.exports = {
       user && passwordHash.verify(req.body.password, user.password) && user.isActivated &&
         res.status(200).json({
           message: 'Congratulation, you are logged!',
-          token: jwt.sign({id: user.id}, secret.key, {expiresIn: constants.TIME_TOKEN})
+          token: jwt.sign({id: user.id}, secret.key, {expiresIn: constants.TIME_TOKEN}),
+          user_id: user.id
         }) ||
       user && user.isActivated &&
         res.status(400).json({message: 'Inputted password is not valid'}) ||
