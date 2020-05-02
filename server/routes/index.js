@@ -26,6 +26,10 @@ module.exports = (app) => {
     '/user/:id/group/:group/subGroup_create',
     subGroupOfBookmarkController.create
   );
+  app.get(
+    '/user/:id/group/:group/subGroup_list',
+    subGroupOfBookmarkController.list
+  );
 
   app.post(
     '/user/:id/group/:group/subGroup/:subGroup/bookmark_create',
