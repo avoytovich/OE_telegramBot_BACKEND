@@ -10,7 +10,7 @@ const secret = require('./../config/jwt.secretkey.json');
 const jwt = require('jsonwebtoken');
 
 const token = (req) => req.headers['x-access-token'];
-const tokenFreeURLs = ['/login', '/user_create', '/activation'];
+const tokenFreeURLs = ['/login', '/user_create', '/activation', '/token'];
 const checkURL = (baseUrl) => tokenFreeURLs.some((URL) => baseUrl.match(URL));
 const verifyToken = (token, res, req, next) =>
   jwt.verify(
