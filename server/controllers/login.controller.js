@@ -9,7 +9,6 @@ const tokenList = {};
 module.exports = {
   tokenList,
   login(req, res) {
-    console.log('tokenList', tokenList);
     User.findOne({
       where: {
         email: req.body.email,
