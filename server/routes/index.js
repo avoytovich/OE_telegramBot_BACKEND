@@ -31,6 +31,10 @@ module.exports = (app) => {
     '/user/:id/group/:group/subgroup_list',
     subGroupOfBookmarkController.list
   );
+  app.delete(
+    '/user/:id/group/:group/subgroup_delete',
+    subGroupOfBookmarkController.delete
+  );
 
   app.post(
     '/user/:id/group/:group/subGroup/:subGroup/bookmark_create',
