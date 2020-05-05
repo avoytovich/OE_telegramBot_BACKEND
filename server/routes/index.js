@@ -15,6 +15,7 @@ module.exports = (app) => {
 
   app.post('/login', loginController.login);
   app.get('/activation/:token', loginController.activation);
+  app.post('/token', loginController.refreshToken);
 
   app.post('/user_create', userController.create);
 
@@ -23,12 +24,16 @@ module.exports = (app) => {
   app.delete('/user/:id/groups_delete', groupOfBookmarkController.delete);
 
   app.post(
-    '/user/:id/group/:group/subGroup_create',
+    '/user/:id/group/:group/subgroup_create',
     subGroupOfBookmarkController.create
   );
   app.get(
-    '/user/:id/group/:group/subGroup_list',
+    '/user/:id/group/:group/subgroup_list',
     subGroupOfBookmarkController.list
+  );
+  app.delete(
+    '/user/:id/group/:group/subgroup_delete',
+    subGroupOfBookmarkController.delete
   );
 
   app.post(

@@ -18,4 +18,10 @@ module.exports = {
       .then((subGroups) => res.status(200).json({ subGroups }))
       .catch((error) => res.status(404).send(error));
   },
+  delete(req, res) {
+    const subGroupsIds = req.body.map((each) => each.id);
+    SubGroupOfBookmarks.destroy({ where: { id: subGroupsIds } })
+      .then((subGroups) => res.status(200).json({ subGroups }))
+      .catch((error) => res.status(404).send(error));
+  },
 };
