@@ -37,7 +37,11 @@ module.exports = (app) => {
   );
 
   app.post(
-    '/user/:id/group/:group/subGroup/:subGroup/bookmark_create',
+    '/user/:id/group/:group/subgroup/:subgroup/bookmark_create',
     bookmarkController.create
+  );
+  app.get(
+    '/user/:id/group/:group/subGroup/:subgroup/bookmark_list',
+    bookmarkController.list
   );
 };
