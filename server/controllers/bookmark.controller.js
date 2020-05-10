@@ -18,4 +18,10 @@ module.exports = {
       .then((bookmarks) => res.status(200).json({ bookmarks }))
       .catch((error) => res.status(404).send(error));
   },
+  delete(req, res) {
+    const bookmarksIds = req.body.map((each) => each.id);
+    Bookmarks.destroy({ where: { id: bookmarksIds } })
+      .then((bookmarks) => res.status(200).json({ bookmarks }))
+      .catch((error) => res.status(404).send(error));
+  },
 };

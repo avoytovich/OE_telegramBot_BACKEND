@@ -44,4 +44,8 @@ module.exports = (app) => {
     '/user/:id/group/:group/subGroup/:subgroup/bookmark_list',
     bookmarkController.list
   );
+  app.delete(
+    '/user/:id/group/:group/subGroup/:subgroup/bookmark_delete',
+    bookmarkController.delete
+  );
 };
