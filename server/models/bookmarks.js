@@ -1,13 +1,18 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Bookmarks = sequelize.define('Bookmarks', {
-    title: DataTypes.STRING,
-    searchWords: DataTypes.ARRAY(DataTypes.STRING),
-    SubGroupOfBookmarksId: DataTypes.INTEGER
-  }, {});
-  Bookmarks.associate = function(models) {
+  const Bookmarks = sequelize.define(
+    'Bookmarks',
+    {
+      title: DataTypes.STRING,
+      link: DataTypes.STRING,
+      searchWords: DataTypes.ARRAY(DataTypes.STRING),
+      SubGroupOfBookmarksId: DataTypes.INTEGER,
+    },
+    {}
+  );
+  Bookmarks.associate = function (models) {
     Bookmarks.belongsTo(models.SubGroupOfBookmarks, {
-      foreignKey: 'SubGroupOfBookmarksId'
+      foreignKey: 'SubGroupOfBookmarksId',
     });
   };
   return Bookmarks;
