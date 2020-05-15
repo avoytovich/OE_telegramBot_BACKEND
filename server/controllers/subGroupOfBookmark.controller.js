@@ -18,6 +18,13 @@ module.exports = {
       .then((subGroups) => res.status(200).json({ subGroups }))
       .catch((error) => res.status(404).send(error));
   },
+  retrieve(req, res) {
+    SubGroupOfBookmarks.findOne({
+      where: { id: req.params.subgroup },
+    })
+      .then((subGroup) => res.status(200).json({ subGroup }))
+      .catch((error) => res.status(404).send(error));
+  },
   delete(req, res) {
     const subGroupsIds = req.body.map((each) => each.id);
     SubGroupOfBookmarks.destroy({ where: { id: subGroupsIds } })
