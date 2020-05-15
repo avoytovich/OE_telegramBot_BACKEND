@@ -4,6 +4,7 @@ const {
   groupOfBookmarkController,
   subGroupOfBookmarkController,
   bookmarkController,
+  searchController,
 } = require('./../controllers');
 
 module.exports = (app) => {
@@ -31,6 +32,10 @@ module.exports = (app) => {
     '/user/:id/group/:group/subgroup_list',
     subGroupOfBookmarkController.list
   );
+  app.get(
+    '/user/:id/subgroup/:subgroup',
+    subGroupOfBookmarkController.retrieve
+  );
   app.delete(
     '/user/:id/group/:group/subgroup_delete',
     subGroupOfBookmarkController.delete
@@ -48,4 +53,6 @@ module.exports = (app) => {
     '/user/:id/group/:group/subGroup/:subgroup/bookmark_delete',
     bookmarkController.delete
   );
+
+  app.get('/user/:id/search', searchController.list);
 };
