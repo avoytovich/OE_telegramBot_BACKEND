@@ -6,7 +6,8 @@ const cors = require('cors');
 // Set up the express app
 const app = express();
 
-const secret = require('./../config/jwt.secretkey.json');
+// const secret_key = require('./../../config/jwt.secretkey.json').key;
+const secret_key = process.env.JWT_SECRET_KEY;
 const jwt = require('jsonwebtoken');
 
 const token = (req) => req.headers['x-access-token'];
@@ -15,7 +16,7 @@ const checkURL = (baseUrl) => tokenFreeURLs.some((URL) => baseUrl.match(URL));
 const verifyToken = (token, res, req, next) =>
   jwt.verify(
     token,
-    secret.key,
+    secret_key,
     (err, decoded) =>
       (err && res.status(401).json({ message: 'token is not valid' })) ||
       ((req.decoded = decoded) && next())
