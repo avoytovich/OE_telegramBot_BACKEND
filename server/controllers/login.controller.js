@@ -42,6 +42,10 @@ module.exports = {
               };
               tokenList[refreshToken] = response;
               return res.status(200).json(response);
+            } else if (!user.isActivated) {
+              return res
+                .status(400)
+                .json({ message: "Your account isn't activated" });
             }
           } else if (user.isActivated) {
             return res
