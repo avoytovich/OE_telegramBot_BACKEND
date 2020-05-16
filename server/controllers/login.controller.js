@@ -2,11 +2,13 @@ const { User, Profile } = require('./../models');
 const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const secret_key =
-  process.env.JWT_SECRET_KEY ||
-  require('./../../config/jwt.secretkey.json').key;
+  process.env == 'production'
+    ? process.env.JWT_SECRET_KEY
+    : require('./../../config/jwt.secretkey.json').key;
 const secret_refresh =
-  process.env.JWT_SECRET_REFRESH ||
-  require('./../../config/jwt.secretkey.json').refreshKey;
+  process.env == 'production'
+    ? process.env.JWT_SECRET_REFRESH
+    : require('./../../config/jwt.secretkey.json').refreshKey;
 const constants = require('./../helper/constants');
 
 const tokenList = {};
