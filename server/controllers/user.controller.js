@@ -1,7 +1,8 @@
 const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const { User } = require('./../models');
-const secret = process.env.JWT_SECRET_KEY;
+const secret =
+  process.env.JWT_SECRET || require('./../../config/jwt.secretkey.json');
 const constants = require('./../helper/constants');
 const { send } = require('./../helper/mailer');
 
@@ -21,7 +22,7 @@ module.exports = {
             password: passwordHash.generate(req.body.password),
             isActivated: false,
           }).then((user) => {
-            let token = jwt.sign({ id: user.id }, secret, {
+            let token = jwt.sign({ id: user.id }, secret.key, {
               expiresIn: constants.TIME_TOKEN,
             });
             let mailOptions = {
