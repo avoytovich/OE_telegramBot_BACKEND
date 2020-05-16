@@ -1,7 +1,12 @@
 const { User, Profile } = require('./../models');
 const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
-const secret = require('./../../config/jwt.secretkey.json');
+const secret_key =
+  process.env.JWT_SECRET_KEY ||
+  require('./../../config/jwt.secretkey.json').key;
+const secret_refresh =
+  process.env.JWT_SECRET_REFRESH ||
+  require('./../../config/jwt.secretkey.json').refreshKey;
 const constants = require('./../helper/constants');
 
 const tokenList = {};
@@ -18,16 +23,12 @@ module.exports = {
         if (user) {
           if (passwordHash.verify(req.body.password, user.password)) {
             if (user.isActivated) {
-              const token = jwt.sign({ id: user.id }, secret.key, {
+              const token = jwt.sign({ id: user.id }, secret_key, {
                 expiresIn: constants.TIME_TOKEN,
               });
-              const refreshToken = jwt.sign(
-                { id: user.id },
-                secret.refreshKey,
-                {
-                  expiresIn: constants.TIME_REFRESH_TOKEN,
-                }
-              );
+              const refreshToken = jwt.sign({ id: user.id }, secret_refresh, {
+                expiresIn: constants.TIME_REFRESH_TOKEN,
+              });
               const response = {
                 message: 'Congratulation, you are logged!',
                 token,
@@ -56,7 +57,7 @@ module.exports = {
   },
   activation(req, res) {
     let token = req.params.token;
-    let decoder = jwt.verify(token, secret.key, (err, decoded) => {
+    let decoder = jwt.verify(token, secret_key, (err, decoded) => {
       return (
         (decoded && decoded.id) ||
         res.status(498).json({ message: 'link is not valid' })
@@ -85,7 +86,7 @@ module.exports = {
       const user = {
         id: postData.id,
       };
-      const token = jwt.sign(user, secret.key, {
+      const token = jwt.sign(user, secret_key, {
         expiresIn: constants.TIME_TOKEN,
       });
       const response = {
