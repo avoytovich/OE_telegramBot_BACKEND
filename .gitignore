@@ -5,3 +5,4 @@ build/
 config/config.json
 config/jwt.secretkey.json
 config/mailer.config.json
+.env
