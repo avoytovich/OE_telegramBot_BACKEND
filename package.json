@@ -34,7 +34,8 @@
     "password-hash": "^1.2.2",
     "pg": "^7.0.2",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.4.2"
+    "sequelize": "^4.4.2",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
