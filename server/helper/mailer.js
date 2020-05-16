@@ -1,7 +1,9 @@
 const nodemailer = require('nodemailer');
-// const config = require('./../../config/mailer.config.json');
 
+// DEV
+// const config = require('./../../config/mailer.config.json');
 // let mailer =  nodemailer.createTransport(config);
+// PROD
 let mailer = nodemailer.createTransport({
   host: process.env.MAILER_HOST,
   port: process.env.MAILER_PORT,

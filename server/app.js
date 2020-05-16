@@ -6,8 +6,11 @@ const cors = require('cors');
 // Set up the express app
 const app = express();
 
+// DEV
 // const secret_key = require('./../../config/jwt.secretkey.json').key;
+// PROD
 const secret_key = process.env.JWT_SECRET_KEY;
+
 const jwt = require('jsonwebtoken');
 
 const token = (req) => req.headers['x-access-token'];
