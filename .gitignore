@@ -2,4 +2,6 @@ node_modules
 .idea/
 package-lock.json
 build/
-config/
+config/config.json
+config/jwt.secretkey.json
+config/mailer.config.json
