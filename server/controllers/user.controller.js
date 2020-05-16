@@ -1,7 +1,9 @@
 const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const { User } = require('./../models');
-const secret = require('./../../config/jwt.secretkey.json') || JWT_SECRET_KEY;
+const secret =
+  require('./../../config/jwt.secretkey.json').key ||
+  process.env.JWT_SECRET_KEY;
 const constants = require('./../helper/constants');
 const { send } = require('./../helper/mailer');
 
@@ -21,7 +23,7 @@ module.exports = {
             password: passwordHash.generate(req.body.password),
             isActivated: false,
           }).then((user) => {
-            let token = jwt.sign({ id: user.id }, secret.key, {
+            let token = jwt.sign({ id: user.id }, secret, {
               expiresIn: constants.TIME_TOKEN,
             });
             let mailOptions = {
@@ -33,11 +35,9 @@ module.exports = {
                            <a href="http://localhost:8033/activation/${token}">link</a>`,
             };
             send(mailOptions);
-            res
-              .status(200)
-              .json({
-                message: 'Congratulation, check your email for activation',
-              });
+            res.status(200).json({
+              message: 'Congratulation, check your email for activation',
+            });
           });
       })
       .catch((error) => res.status(404).send(error));
