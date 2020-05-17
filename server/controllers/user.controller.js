@@ -5,7 +5,10 @@ const { User } = require('./../models');
 // DEV
 // const secret_key = require('./../../config/jwt.secretkey.json').key;
 // PROD
-const secret_key = process.env.JWT_SECRET_KEY;
+// const secret_key = process.env.JWT_SECRET_KEY;
+
+const env = process.env.NODE_ENV || 'development';
+const secret_key = require('./../helper/constants').secret_key[env];
 
 const constants = require('./../helper/constants');
 const { send } = require('./../helper/mailer');
