@@ -5,12 +5,16 @@ const jwt = require('jsonwebtoken');
 // DEV
 // const secret_key = require('./../../config/jwt.secretkey.json').key;
 // PROD
-const secret_key = process.env.JWT_SECRET_KEY;
+// const secret_key = process.env.JWT_SECRET_KEY;
 
 // DEV
 // const secret_refresh = require('./../../config/jwt.secretkey.json').refreshKey;
 // PROD
-const secret_refresh = process.env.JWT_SECRET_REFRESH;
+// const secret_refresh = process.env.JWT_SECRET_REFRESH;
+
+const env = process.env.NODE_ENV || 'development';
+const secret_key = require('./../helper/constants').secret_key[env];
+const secret_refresh = require('./../helper/constants').secret_refresh[env];
 
 const constants = require('./../helper/constants');
 

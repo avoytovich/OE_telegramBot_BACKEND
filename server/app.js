@@ -7,14 +7,23 @@ const cors = require('cors');
 const app = express();
 
 // DEV
-// const secret_key = require('./../../config/jwt.secretkey.json').key;
+// const secret_key = require('./../config/jwt.secretkey.json').key;
 // PROD
-const secret_key = process.env.JWT_SECRET_KEY;
+// const secret_key = process.env.JWT_SECRET_KEY;
+
+const env = process.env.NODE_ENV || 'development';
+const secret_key = require('./helper/constants').secret_key[env];
 
 const jwt = require('jsonwebtoken');
 
 const token = (req) => req.headers['x-access-token'];
-const tokenFreeURLs = ['/login', '/user_create', '/activation', '/token'];
+const tokenFreeURLs = [
+  '/login',
+  '/user_create',
+  '/activation',
+  '/token',
+  '/favicon.ico?v2=v2',
+];
 const checkURL = (baseUrl) => tokenFreeURLs.some((URL) => baseUrl.match(URL));
 const verifyToken = (token, res, req, next) =>
   jwt.verify(

@@ -2,17 +2,21 @@ const nodemailer = require('nodemailer');
 
 // DEV
 // const config = require('./../../config/mailer.config.json');
-// let mailer =  nodemailer.createTransport(config);
+// let mailer = nodemailer.createTransport(config);
 // PROD
-let mailer = nodemailer.createTransport({
-  host: process.env.MAILER_HOST,
-  port: process.env.MAILER_PORT,
-  secure: process.env.MAILER_SECURE,
-  auth: {
-    user: process.env.MAILER_USER,
-    pass: process.env.MAILER_PASS,
-  },
-});
+// let mailer = nodemailer.createTransport({
+//   host: process.env.MAILER_HOST,
+//   port: process.env.MAILER_PORT,
+//   secure: process.env.MAILER_SECURE,
+//   auth: {
+//     user: process.env.MAILER_USER,
+//     pass: process.env.MAILER_PASS,
+//   },
+// });
+
+const env = process.env.NODE_ENV || 'development';
+const config = require('./../helper/constants').mailer_config[env];
+let mailer = nodemailer.createTransport(config);
 
 mailer.verify(function (error, success) {
   if (error) {
