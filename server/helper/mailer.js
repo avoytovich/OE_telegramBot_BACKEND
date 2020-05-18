@@ -1,20 +1,6 @@
 const nodemailer = require('nodemailer');
-
-// DEV
-// const config = require('./../../config/mailer.config.json');
-// let mailer = nodemailer.createTransport(config);
-// PROD
-// let mailer = nodemailer.createTransport({
-//   host: process.env.MAILER_HOST,
-//   port: process.env.MAILER_PORT,
-//   secure: process.env.MAILER_SECURE,
-//   auth: {
-//     user: process.env.MAILER_USER,
-//     pass: process.env.MAILER_PASS,
-//   },
-// });
-
 const config = require('./../../config/mailer.config');
+
 let mailer = nodemailer.createTransport(config);
 
 mailer.verify(function (error, success) {

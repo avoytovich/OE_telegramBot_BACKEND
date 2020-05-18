@@ -1,20 +1,8 @@
 const { User, Profile } = require('./../models');
 const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
-
-// DEV
-// const secret_key = require('./../../config/jwt.secretkey.json').key;
-// PROD
-// const secret_key = process.env.JWT_SECRET_KEY;
-
-// DEV
-// const secret_refresh = require('./../../config/jwt.secretkey.json').refreshKey;
-// PROD
-// const secret_refresh = process.env.JWT_SECRET_REFRESH;
-
 const secret_key = require('./../../config/jwt.secretkey').key;
 const secret_refresh = require('./../../config/jwt.secretkey').refreshKey;
-
 const constants = require('./../helper/constants');
 
 const tokenList = {};
