@@ -2,18 +2,11 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const secret_key = require('./../config/jwt.secretkey').key;
 
 // Set up the express app
 const app = express();
-
-// DEV
-// const secret_key = require('./../config/jwt.secretkey.json').key;
-// PROD
-// const secret_key = process.env.JWT_SECRET_KEY;
-
-const secret_key = require('./../config/jwt.secretkey').key;
-
-const jwt = require('jsonwebtoken');
 
 const token = (req) => req.headers['x-access-token'];
 const tokenFreeURLs = [
@@ -21,7 +14,7 @@ const tokenFreeURLs = [
   '/user_create',
   '/activation',
   '/token',
-  '/favicon.ico?v2=v2',
+  '/favicon',
 ];
 const checkURL = (baseUrl) => tokenFreeURLs.some((URL) => baseUrl.match(URL));
 const verifyToken = (token, res, req, next) =>

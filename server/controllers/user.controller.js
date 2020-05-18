@@ -1,14 +1,7 @@
 const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const { User } = require('./../models');
-
-// DEV
-// const secret_key = require('./../../config/jwt.secretkey.json').key;
-// PROD
-// const secret_key = process.env.JWT_SECRET_KEY;
-
 const secret_key = require('./../../config/jwt.secretkey').key;
-
 const constants = require('./../helper/constants');
 const { send } = require('./../helper/mailer');
 
