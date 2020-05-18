@@ -14,8 +14,7 @@ const nodemailer = require('nodemailer');
 //   },
 // });
 
-const env = process.env.NODE_ENV || 'development';
-const config = require('./../helper/constants').mailer_config[env];
+const config = require('./../../config/mailer.config');
 let mailer = nodemailer.createTransport(config);
 
 mailer.verify(function (error, success) {

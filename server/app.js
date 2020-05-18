@@ -11,8 +11,7 @@ const app = express();
 // PROD
 // const secret_key = process.env.JWT_SECRET_KEY;
 
-const env = process.env.NODE_ENV || 'development';
-const secret_key = require('./helper/constants').secret_key[env];
+const secret_key = require('./../config/jwt.secretkey').key;
 
 const jwt = require('jsonwebtoken');
 
