@@ -12,9 +12,8 @@ const jwt = require('jsonwebtoken');
 // PROD
 // const secret_refresh = process.env.JWT_SECRET_REFRESH;
 
-const env = process.env.NODE_ENV || 'development';
-const secret_key = require('./../helper/constants').secret_key[env];
-const secret_refresh = require('./../helper/constants').secret_refresh[env];
+const secret_key = require('./../../config/jwt.secretkey').key;
+const secret_refresh = require('./../../config/jwt.secretkey').refreshKey;
 
 const constants = require('./../helper/constants');
 
