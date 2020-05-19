@@ -17,7 +17,7 @@ module.exports = {
       if (error) {
         console.log(error);
       }
-      console.log('Message sent:', info.messageId);
+      // console.log('Message sent:', info.messageId);
     });
   },
 };
