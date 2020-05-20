@@ -48,9 +48,16 @@ module.exports = {
               .json({ message: "Your account isn't activated" });
           }
         } else {
-          return res
-            .status(400)
-            .json({ message: 'Before login you must sign up!' });
+          User.create({
+            email: req.body.email,
+            password: passwordHash.generate(req.body.password),
+            isActivated: false,
+          }).then((user) => {
+            res.status(200).json({
+              message:
+                'Congratulation, you will be informed by email, once your account will be activated',
+            });
+          });
         }
       })
       .catch((error) => res.status(401).send(error));
