@@ -1,9 +1,6 @@
 const passwordHash = require('password-hash');
-const jwt = require('jsonwebtoken');
+
 const { User } = require('./../models');
-const secret_key = require('./../../config/jwt.secretkey').key;
-const constants = require('./../helper/constants');
-const { send } = require('./../helper/mailer');
 
 module.exports = {
   create(req, res) {
@@ -21,20 +18,9 @@ module.exports = {
             password: passwordHash.generate(req.body.password),
             isActivated: false,
           }).then((user) => {
-            let token = jwt.sign({ id: user.id }, secret_key, {
-              expiresIn: constants.TIME_TOKEN,
-            });
-            let mailOptions = {
-              from: '"soldapp" <soldapp@ukr.net>',
-              to: user.email,
-              subject: 'Registration for soldApp',
-              text: 'click on link to activate your account',
-              html: `<b>click on link below to activate your account</b>
-                           <a href="http://localhost:8033/activation/${token}">link</a>`,
-            };
-            send(mailOptions);
             res.status(200).json({
-              message: 'Congratulation, check your email for activation',
+              message:
+                'Congratulation, you will be informed by email, once your account will be activated',
             });
           });
       })
