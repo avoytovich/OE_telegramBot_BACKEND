@@ -1,4 +1,4 @@
-const { User, Profile } = require('./../models');
+const { User } = require('./../models');
 const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const secret_key = require('./../../config/jwt.secretkey').key;
@@ -61,29 +61,6 @@ module.exports = {
         }
       })
       .catch((error) => res.status(401).send(error));
-  },
-  activation(req, res) {
-    let token = req.params.token;
-    let decoder = jwt.verify(token, secret_key, (err, decoded) => {
-      return (
-        (decoded && decoded.id) ||
-        res.status(498).json({ message: 'link is not valid' })
-      );
-    });
-    User.findById(decoder)
-      .then((user) => {
-        (!user && res.status(404).json({ message: 'userNotFound' })) ||
-          (user.isActivated &&
-            res.status(418).json({ message: 'linkAlreadyActivated' })) ||
-          (user.update({
-            isActivated: true,
-          }) &&
-            Profile.create({
-              UserId: decoder,
-            }) &&
-            res.redirect('http://localhost:8080/'));
-      })
-      .catch((error) => res.status(400).send(error));
   },
   refreshToken(req, res) {
     // refresh the damn token

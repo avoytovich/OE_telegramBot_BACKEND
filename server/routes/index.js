@@ -15,10 +15,12 @@ module.exports = (app) => {
   );
 
   app.post('/login', loginController.login);
-  app.get('/activation/:token', loginController.activation);
   app.post('/token', loginController.refreshToken);
 
-  // app.post('/user_create', userController.create);
+  app.get('/user/:id', userController.retrieve);
+  app.get('/user/:id/user_list', userController.list);
+  app.post('/user/:id/user_activate', userController.activation);
+  app.post('/user/:id/user_deactivate', userController.deactivation);
 
   app.post('/user/:id/group_create', groupOfBookmarkController.create);
   app.get('/user/:id/group_list', groupOfBookmarkController.list);
