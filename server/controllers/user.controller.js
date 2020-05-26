@@ -1,6 +1,12 @@
 const { Op } = require('sequelize');
 
-const { User, Profile } = require('./../models');
+const {
+  User,
+  Profile,
+  GroupOfBookmarks,
+  SubGroupOfBookmarks,
+  Bookmarks,
+} = require('./../models');
 
 module.exports = {
   retrieve(req, res) {
@@ -48,5 +54,51 @@ module.exports = {
         });
       })
       .catch((error) => res.status(400).send(error));
+  },
+  delete(req, res) {
+    GroupOfBookmarks.findAll({ where: { UserId: req.body.id } })
+      .then((groups) => {
+        groups &&
+          groups.forEach((group) => {
+            SubGroupOfBookmarks.findAll({
+              where: { GroupOfBookmarksId: group.id },
+            }).then((subgroups) => {
+              subgroups &&
+                subgroups.forEach((subgroup) => {
+                  Bookmarks.findAll({
+                    where: { SubGroupOfBookmarksId: subgroup.id },
+                  })
+                    .then((bookmarks) => {
+                      bookmarks &&
+                        bookmarks.forEach((bookmark) => {
+                          Bookmarks.destroy({
+                            where: { id: bookmark.id },
+                          });
+                        });
+                    })
+                    .then((data) => {
+                      SubGroupOfBookmarks.destroy({
+                        where: { id: subgroup.id },
+                      });
+                    });
+                });
+            });
+          });
+      })
+      .catch((error) => res.status(404).send(error));
+    setTimeout(() => {
+      GroupOfBookmarks.destroy({
+        where: { UserId: req.body.id },
+      })
+        .then((data) => {
+          Profile.destroy({ where: { UserId: req.body.id } });
+        })
+        .then((data) => {
+          User.destroy({ where: { id: req.body.id } }).then((user) => {
+            res.status(200).json({ user });
+          });
+        })
+        .catch((error) => res.status(404).send(error));
+    }, 1000);
   },
 };

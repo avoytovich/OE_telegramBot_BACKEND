@@ -21,6 +21,7 @@ module.exports = (app) => {
   app.get('/user/:id/user_list', userController.list);
   app.post('/user/:id/user_activate', userController.activation);
   app.post('/user/:id/user_deactivate', userController.deactivation);
+  app.delete('/user/:id/user_delete', userController.delete);
 
   app.post('/user/:id/group_create', groupOfBookmarkController.create);
   app.get('/user/:id/group_list', groupOfBookmarkController.list);
