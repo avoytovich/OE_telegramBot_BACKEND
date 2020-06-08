@@ -80,7 +80,7 @@ module.exports = {
       tokenList[postData.refreshToken].token = token;
       res.status(200).json(response);
     } else {
-      res.status(404).send('Invalid request');
+      res.status(403).send('Invalid request');
     }
   },
 };
