@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/avoytovich/sold#readme",
   "dependencies": {
+    "article-parser": "^4.2.1",
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "dotenv": "^8.2.0",

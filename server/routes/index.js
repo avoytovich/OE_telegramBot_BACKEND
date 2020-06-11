@@ -4,6 +4,7 @@ const {
   groupOfBookmarkController,
   subGroupOfBookmarkController,
   bookmarkController,
+  articleController,
   searchController,
 } = require('./../controllers');
 
@@ -56,6 +57,8 @@ module.exports = (app) => {
     '/user/:id/group/:group/subGroup/:subgroup/bookmark_delete',
     bookmarkController.delete
   );
+
+  app.get('/user/:id/article', articleController.retrieve);
 
   app.get('/user/:id/search', searchController.list);
 };
