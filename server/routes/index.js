@@ -21,6 +21,6 @@ module.exports = (app) => {
   // app.delete('/user/:id/user_delete', userController.delete);
 
   app.post('/follower_create', followerController.create);
-  // app.get('/user/:id/follower_list', followerController.list);
-  // app.delete('/user/:id/follower_delete', followerController.delete);
+  app.get('/user/:id/follower_list', followerController.list);
+  app.delete('/user/:id/followers_delete', followerController.delete);
 };

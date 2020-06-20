@@ -9,16 +9,14 @@ module.exports = {
       .catch((error) => res.status(404).send(error));
   },
   list(req, res) {
-    // Follower.findAll({
-    //   where: { UserId: req.params.id },
-    // })
-    //   .then((groups) => res.status(200).json({ groups }))
-    //   .catch((error) => res.status(404).send(error));
+    Follower.findAll()
+      .then((followers) => res.status(200).json({ followers }))
+      .catch((error) => res.status(404).send(error));
   },
   delete(req, res) {
-    // const groupsIds = req.body.map((each) => each.id);
-    // Follower.destroy({ where: { id: groupsIds } })
-    //   .then((groups) => res.status(200).json({ groups }))
-    //   .catch((error) => res.status(404).send(error));
+    const followersIds = req.body.map((each) => each.id);
+    Follower.destroy({ where: { id: followersIds } })
+      .then((followers) => res.status(200).json({ followers }))
+      .catch((error) => res.status(404).send(error));
   },
 };
