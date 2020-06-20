@@ -1,28 +1,24 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bookmarks', {
+    return queryInterface.createTable('Followers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
+      first_name: {
         type: Sequelize.STRING,
       },
-      link: {
+      last_name: {
         type: Sequelize.STRING,
       },
-      searchWords: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+      level: {
+        type: Sequelize.STRING,
       },
-      SubGroupOfBookmarksId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'SubGroupOfBookmarks',
-          key: 'id',
-        },
+      email: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bookmarks');
+    return queryInterface.dropTable('Followers');
   },
 };

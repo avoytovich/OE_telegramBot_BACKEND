@@ -9,7 +9,7 @@ const secret_key = require('./../config/jwt.secretkey').key;
 const app = express();
 
 const token = (req) => req.headers['x-access-token'];
-const tokenFreeURLs = ['/login', '/token'];
+const tokenFreeURLs = ['/login', '/token', '/follower_create'];
 const checkURL = (baseUrl) => tokenFreeURLs.some((URL) => baseUrl.match(URL));
 const verifyToken = (token, res, req, next) =>
   jwt.verify(
