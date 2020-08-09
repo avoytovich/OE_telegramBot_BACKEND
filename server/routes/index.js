@@ -22,6 +22,6 @@ module.exports = (app) => {
 
   app.post('/follower_create', followerController.create);
   app.get('/user/:id/follower_list', followerController.list);
-  app.get('/user/:id/mail_send', followerController.sendMail);
+  app.post('/user/:id/mail_send', followerController.sendMail);
   app.delete('/user/:id/followers_delete', followerController.delete);
 };
