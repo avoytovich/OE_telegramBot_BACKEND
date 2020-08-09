@@ -1,14 +1,11 @@
 require('dotenv').config();
 
-function sendMail() {
+function sendMail(data) {
   var helper = require('sendgrid').mail;
   var fromEmail = new helper.Email(process.env.SENDGRID_FROM_EMAIL);
-  var toEmail = new helper.Email(process.env.SENDGRID_TO_EMAIL);
+  var toEmail = new helper.Email(data.email);
   var subject = 'Sending with SendGrid is Fun';
-  var content = new helper.Content(
-    'text/plain',
-    'and easy to do anywhere, even with Node.js'
-  );
+  var content = new helper.Content('text/html', data.payload);
   var mail = new helper.Mail(fromEmail, subject, toEmail, content);
 
   var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);

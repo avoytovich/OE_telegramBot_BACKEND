@@ -15,7 +15,7 @@ module.exports = {
       .catch((error) => res.status(404).send(error));
   },
   sendMail(req, res) {
-    Promise.resolve(sendMail())
+    Promise.resolve(sendMail(req.body))
       .then((data) => res.status(200).json({ message: 'mail was sent' }))
       .catch((error) => res.status(404).send(error));
   },
